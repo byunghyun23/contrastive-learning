@@ -23,5 +23,5 @@ After training, CLR(Contrastive Learning Representations) model and FT(Fine-tuni
 | Type | Epochs | Feature dimensionality  | Projection Head dimensionality | Valid Accuracy (Best)          |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | Without Contrastive Learning (NN.pth)          | 50          | 512         | 256         | 0.6909         |
-| With Contrastive Learning (FT.pth)          | 50          | 512         | 256         | 0.7269         |
+| With Contrastive Learning (FT.pth)          | 50          | 512         | 256         | 0.7276         |
 
