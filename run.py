@@ -13,7 +13,7 @@ from model import RepresentativeModel, ContrastiveLoss, FineTunedModel
 @click.command()
 @click.option('--embedding_dim', default=512, help='Embedding dimension')
 @click.option('--batch_size', default=128, help='Batch size')
-@click.option('--epochs', default=50, help='Epochs')
+@click.option('--epochs', default=30, help='Epochs')
 @click.option('--max_early_stop', default=5, help='CLR max early stop count')
 @click.option('--learning_rate', default=0.001, help='Learning rate')
 @click.option('--temperature', default=0.5, help='Temperature')
@@ -105,10 +105,9 @@ def main(embedding_dim, batch_size, epochs, max_early_stop, learning_rate, tempe
             print(f'Early Stop Count: {cnt_early_stop}..')
             if cnt_early_stop == max_early_stop:
                 break
-
+    representative_model.load_state_dict(torch.load('CLR.pth'))
 
     ## Train Fine-tuning model
-    representative_model.load_state_dict(torch.load('CLR.pth'))
     finetuning_model = FineTunedModel(embedding_dim, num_classes, representative_model).to(device)
     finetuning_criterion = nn.CrossEntropyLoss().to(device)
     # finetuning_optimizer = optim.SGD(finetuning_model.parameters(), lr=learning_rate, momentum=0.9)

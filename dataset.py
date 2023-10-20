@@ -1,21 +1,23 @@
 from torch.utils.data import Dataset
 from torchvision.datasets import CIFAR10
+from gaussian_blur import GaussianBlur
 import torchvision.transforms as transforms
 
 
 class CustomCIFAR10(Dataset):
     def __init__(self, root, train=True):
+        self.s = 1
+        self.color_jitter = transforms.ColorJitter(0.8 * self.s, 0.8 * self.s, 0.8 * self.s, 0.2 * self.s)
         self.default_transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+            transforms.ToTensor()
         ])
         self.transform = transforms.Compose([
+            transforms.RandomResizedCrop(size=32),
             transforms.RandomHorizontalFlip(),
-            transforms.RandomCrop(32, padding=4),
-            transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
-            transforms.RandomRotation(15),
-            transforms.ToTensor(),
-            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+            transforms.RandomApply([self.color_jitter], p=0.8),
+            transforms.RandomGrayscale(p=0.2),
+            GaussianBlur(kernel_size=int(0.1 * 32)),
+            transforms.ToTensor()
         ])
         self.cifar_dataset = CIFAR10(root=root, train=train, download=True, transform=transforms.ToTensor())
 
