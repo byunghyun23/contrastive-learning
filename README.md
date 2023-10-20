@@ -1,7 +1,7 @@
-# Contrastive Learning
+# Contrastive Learning Verification
 
 ## Introduction
-This is a PyTorch implementation for Contrastive Learning.  
+This is a PyTorch implementation for Contrastive Learning Verification.  
 
 ![image](https://github.com/byunghyun23/contrastive-learning/blob/main/assets/fig1.png)
 
