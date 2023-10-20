@@ -17,6 +17,7 @@ We used CIFAR-10 dataset.
 python run.py
 ```
 After training, CLR(Contrastive Learning Representations) model and FT(Fine-tuning) model are generated.
+If you adjust the structure of the model, such as dropout, you will get better results.
 
 ## Results
 ![image](https://github.com/byunghyun23/contrastive-learning/blob/main/assets/fig4.png)
